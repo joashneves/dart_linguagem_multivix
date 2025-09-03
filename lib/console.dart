@@ -23,7 +23,7 @@ class ConsoleLivros {
   ];
 
   // Criar livro
-  void criarLivro(Livros livro) {
+  criarLivro(Livros livro) {
     livros.add(livro);
     print("📚 Livro '${livro.titulo}' adicionado com sucesso!");
   }
