@@ -52,3 +52,5 @@ O sistema permite:
 ---
 
 ## 📸 Exemplo 
+
+![gif_datela](./midia/atividade_2.gif)
