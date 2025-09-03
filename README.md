@@ -58,7 +58,7 @@ O sistema permite:
 
 ## 📸 Exemplo de funcionamento
 
-![gif_datela](./midia/atividade_3%20(2).gif)
+![gif_datela](./midia/atualizar.gif)
 ![gif_datela](./midia/atividade_3%20(1).gif)
 
 > O GIF demonstra a listagem de livros, cadastro e exclusão com atualização imediata da lista.
