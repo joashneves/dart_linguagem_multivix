@@ -12,7 +12,7 @@ Um sistema de gerenciamento de livros (CRUD) originalmente desenvolvido para rod
   - Tela de **cadastro** de livros (`MyCreateScreen`).
   - Tela de **listagem** dos livros (`MyDataScreen`), agora **com exclusão de itens** usando ícone de lixeira e `setState()` para atualizar a lista dinamicamente.
 - 🗂 A lógica do console (`ConsoleLivros`) foi mantida como **repositório central** para manipulação dos dados.
-- 🏷️ **Atividades separadas por branch**: cada funcionalidade (console, lista, cadastro, exclusão) foi desenvolvida em **branches diferentes** para melhor organização e controle de versões.
+- 🏷️ **Atividades separadas por branch**: cada atividade 1, 2 e 3 foi desenvolvida em **branches diferentes** para melhor organização.
 
 ---
 
@@ -58,6 +58,7 @@ O sistema permite:
 
 ## 📸 Exemplo de funcionamento
 
-![gif_datela](./midia/atividade_2.gif)
+![gif_datela](./midia/atividade_3%20(2).gif)
+![gif_datela](./midia/atividade_3%20(1).gif)
 
 > O GIF demonstra a listagem de livros, cadastro e exclusão com atualização imediata da lista.
