@@ -1,108 +1,81 @@
-// Importa a biblioteca dart:io para permitir leitura e escrita no console
-import 'dart:io';
+import 'package:dart_linguagem_multivix/MyCreatedScreen.dart';
+import 'package:dart_linguagem_multivix/MyDataScreen.dart';
+import 'package:dart_linguagem_multivix/console.dart'; // Importa o ConsoleLivros (CRUD dos livros)
+import 'package:flutter/material.dart'; // Importa o Flutter Material Design
+import 'models/Livros.dart'; // Importa a classe Livros
 
-// Importa a classe Livros (modelo de dados)
-import 'models/Livros.dart';
-
-// Importa a classe ConsoleLivros (que contém o CRUD)
-import 'console.dart';
-
+// Função principal do Flutter, que roda o app
 void main() {
-  // Cria um objeto da classe ConsoleLivros, responsável por gerenciar os livros
-  var console = ConsoleLivros();
+  runApp(const MyApp()); // Inicia o aplicativo chamando MyApp
+}
 
-  // Variável booleana que controla se o programa continua rodando
-  bool rodando = true;
+// Widget raiz do aplicativo
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  // Enquanto "rodando" for verdadeiro, o menu continuará aparecendo
-  while (rodando) {
-    // Exibe o menu principal
-    print("\n=== MENU ===");
-    print("1 - Listar livros");
-    print("2 - Criar livro");
-    print("3 - Atualizar livro");
-    print("4 - Deletar livro");
-    print("5 - Sair");
+  @override
+  Widget build(BuildContext context) {
+    // MaterialApp é o widget principal que define o tema e a navegação
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF2C2C2C), // Fundo escuro #2C2C2C
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black87, // Cor da AppBar
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20), // Estilo do título
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blueGrey[800], // Botão escuro
+            foregroundColor: Colors.white, // Texto branco
+          ),
+        ),
+      ),
+      home: const HomeScreen(), // Define a tela inicial como HomeScreen
+    );
+  }
+}
 
-    // Pede para o usuário escolher uma opção
-    stdout.write("Escolha uma opção: ");
-    String? opcao = stdin.readLineSync(); // Lê a entrada do usuário
+// Tela inicial do app
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
-    // Estrutura de decisão baseada na opção escolhida
-    switch (opcao) {
-      case "1":
-        // Chama o método que lista todos os livros
-        console.listarLivros();
-        break;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // AppBar no topo da tela inicial
+      appBar: AppBar(
+        title: const Text("Tela inicial"), // Título que aparece na AppBar
+      ),
+      body: Center(
+        // Usamos uma coluna para ter dois botões, um embaixo do outro
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Centraliza verticalmente
+          children: [
+            // Botão para cadastrar um novo livro
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyCreateScreen()),
+                );
+              },
+              child: const Text("Cadastrar livro"),
+            ),
+            const SizedBox(height: 20), // Espaço entre os botões
 
-      case "2":
-        // Coleta os dados para criar um novo livro
-        stdout.write("Digite o id: ");
-        int id = int.parse(stdin.readLineSync()!);
-
-        stdout.write("Digite o título: ");
-        String titulo = stdin.readLineSync()!;
-
-        stdout.write("Digite o autor: ");
-        String autor = stdin.readLineSync()!;
-
-        stdout.write("Digite o número de páginas: ");
-        int paginas = int.parse(stdin.readLineSync()!);
-
-        stdout.write("Digite o ano de lançamento: ");
-        int ano = int.parse(stdin.readLineSync()!);
-
-        // Cria e adiciona o livro na lista
-        console.criarLivro(Livros(id, titulo, autor, paginas, DateTime(ano)));
-        break;
-
-      case "3":
-        // Atualizar dados de um livro existente
-        stdout.write("Digite o id do livro a atualizar: ");
-        int id = int.parse(stdin.readLineSync()!);
-
-        // Novo título
-        stdout.write("Novo título (ou Enter para manter): ");
-        String? novoTitulo = stdin.readLineSync();
-        if (novoTitulo != null && novoTitulo.isEmpty) novoTitulo = null;
-
-        // Novo autor
-        stdout.write("Novo autor (ou Enter para manter): ");
-        String? novoAutor = stdin.readLineSync();
-        if (novoAutor != null && novoAutor.isEmpty) novoAutor = null;
-
-        // Novas páginas
-        stdout.write("Novo número de páginas (ou Enter para manter): ");
-        String? paginasStr = stdin.readLineSync();
-        int? novasPaginas = paginasStr != null && paginasStr.isNotEmpty
-            ? int.parse(paginasStr)
-            : null;
-
-        // Chama a atualização no console
-        console.atualizarLivro(
-          id,
-          titulo: novoTitulo,
-          autor: novoAutor,
-          paginas: novasPaginas,
-        );
-        break;
-
-      case "4":
-        // Deletar livro pelo id
-        stdout.write("Digite o id do livro a deletar: ");
-        int id = int.parse(stdin.readLineSync()!);
-        console.deletarLivro(id);
-        break;
-
-      case "5":
-        // Sai do programa
-        print("👋 Encerrando o programa...");
-        rodando = false;
-        break;
-
-      default:
-        // Caso o usuário digite algo inválido
-        print("⚠️ Opção inválida, tente novamente.");
-    }
+            // Botão que leva para a lista de livros
+            ElevatedButton(
+              child: const Text("Ir para lista"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyDataScrean()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
